@@ -95,8 +95,8 @@ export default function Home() {
           className="h-screen w-full snap-start"
           ref={setSectionRef(1)}
         >
-          <div className="flex h-full w-full items-center justify-end px-40">
-            <div className="max-w-lg">
+          <div className="flex h-full w-full items-center justify-end sm:px-10 md:px-40">
+            <div className="max-w-lg sm:max-w-3xl">
               <motion.div
                 initial="hidden"
                 whileInView="visible"

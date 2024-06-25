@@ -24,22 +24,22 @@ export const HomeCarousel = () => {
     }
   }, [postsQuery.isSuccess, postsQuery.data]);
   return (
-    <Carousel className="w-full max-w-lg">
+    <Carousel className="w-full">
       <CarouselContent className="-ml-1">
         {posts &&
           posts.map((post, index) => (
             <CarouselItem
               key={index}
-              className="min-w-32 max-w-60 pl-1 sm:basis-full md:basis-1/2 lg:basis-1/3"
+              className="basis-full sm:basis-1/2 lg:basis-1/3"
             >
-              <div className="p-1">
+              <div className="px-1">
                 <SlideCard description={post.body} title={post.title} />
               </div>
             </CarouselItem>
           ))}
       </CarouselContent>
-      <CarouselPrevious />
-      <CarouselNext />
+      <CarouselPrevious className="hidden sm:block" />
+      <CarouselNext className="hidden sm:block" />
     </Carousel>
   );
 };

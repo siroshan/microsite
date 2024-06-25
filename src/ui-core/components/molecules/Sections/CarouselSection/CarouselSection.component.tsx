@@ -6,11 +6,7 @@ export const CarouselSection = React.forwardRef<
   CarouselSectionProps
 >((props, ref) => {
   return (
-    <section
-      ref={ref}
-      id={props.id}
-      className="flex h-screen w-full snap-center items-center justify-center"
-    >
+    <section ref={ref} id={props.id} className="h-screen w-full snap-center">
       {props.children}
     </section>
   );

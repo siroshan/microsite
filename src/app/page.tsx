@@ -10,10 +10,13 @@ import {
   VideoSection,
 } from "@ui-core/components";
 import { motion } from "framer-motion";
+import { Post, PostService } from "@services/posts";
+import { useQuery } from "@tanstack/react-query";
 
 export default function Home() {
   const sectionsRef = useRef<HTMLElement[]>([]);
   const [currentSection, setCurrentSection] = useState(0);
+  const [post, setPost] = useState<Post>();
   const totalSections = 2; // Update this if you add or remove sections
 
   useEffect(() => {
@@ -44,6 +47,15 @@ export default function Home() {
     if (el) sectionsRef.current[index] = el;
   };
 
+  const postsQuery = useQuery({
+    queryKey: ["posts"],
+    queryFn: () => PostService.getPosts(),
+  });
+  useEffect(() => {
+    if (postsQuery.isSuccess) {
+      setPost(postsQuery.data[0]);
+    }
+  }, [postsQuery.isSuccess, postsQuery.data]);
   return (
     <div>
       <div
@@ -58,33 +70,36 @@ export default function Home() {
           <VideoSection>
             <div className="relative flex h-full items-center justify-center">
               <div className="text-center">
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false }}
-                  transition={{ duration: 1 }}
-                  variants={{
-                    visible: { top: 0 },
-                    hidden: { top: -40 },
-                  }}
-                  className="underline-sm-centered relative mb-10 text-5xl font-semibold uppercase text-gray-700 "
-                >
-                  Lorem Ipsum Dolor
-                </motion.div>
-                <motion.div
-                  initial="hidden"
-                  whileInView="visible"
-                  viewport={{ once: false }}
-                  transition={{ duration: 1 }}
-                  variants={{
-                    visible: { top: 0 },
-                    hidden: { top: 40 },
-                  }}
-                  className="relative max-w-2xl text-xl text-gray-700"
-                >
-                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
-                  Donec odio. Quisque volutpat mattis eros
-                </motion.div>
+                {post && (
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false }}
+                    transition={{ duration: 1 }}
+                    variants={{
+                      visible: { top: 0 },
+                      hidden: { top: -40 },
+                    }}
+                    className="underline-sm-centered relative mb-10 text-5xl font-semibold uppercase text-gray-700 "
+                  >
+                    {post.title}
+                  </motion.div>
+                )}
+                {post && (
+                  <motion.div
+                    initial="hidden"
+                    whileInView="visible"
+                    viewport={{ once: false }}
+                    transition={{ duration: 1 }}
+                    variants={{
+                      visible: { top: 0 },
+                      hidden: { top: 40 },
+                    }}
+                    className="relative max-w-2xl text-xl capitalize text-gray-700"
+                  >
+                    {post.body}
+                  </motion.div>
+                )}
               </div>
             </div>
           </VideoSection>
@@ -97,19 +112,22 @@ export default function Home() {
         >
           <div className="flex h-full w-full items-center justify-end sm:px-10 md:px-40">
             <div className="max-w-lg sm:max-w-3xl">
-              <motion.div
-                initial="hidden"
-                whileInView="visible"
-                viewport={{ once: false, amount: 0.5 }}
-                transition={{ duration: 1 }}
-                variants={{
-                  visible: { right: 0 },
-                  hidden: { right: 40 },
-                }}
-                className="relative mb-10 w-full text-right text-4xl font-bold text-white"
-              >
-                DONEC NEC JUSTO
-              </motion.div>
+              {post && (
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false, amount: 0.5 }}
+                  transition={{ duration: 1 }}
+                  variants={{
+                    visible: { right: 0 },
+                    hidden: { right: 40 },
+                  }}
+                  className="relative mb-10 w-full text-right text-4xl font-bold uppercase text-white"
+                >
+                  {post.title}
+                </motion.div>
+              )}
+
               <HomeCarousel />
             </div>
           </div>

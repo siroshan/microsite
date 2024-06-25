@@ -2,9 +2,13 @@ import React from "react";
 import { ChevronDown } from "@ui-core/components";
 import { ScrollIndicatorProps } from "./ScrollIndicator.type";
 
-export const ScrollIndicator = ({ visible }: ScrollIndicatorProps) => {
+export const ScrollIndicator = ({ visible, onClick }: ScrollIndicatorProps) => {
   return visible ? (
-    <div className="absolute bottom-10 left-1/2 -translate-x-1/2 transform animate-bounce">
+    <div
+      className="absolute bottom-10 left-1/2 -translate-x-1/2 transform animate-bounce cursor-pointer"
+      onClick={onClick}
+      role="button"
+    >
       <ChevronDown width={50} height={50} />
     </div>
   ) : null;

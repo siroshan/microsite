@@ -9,7 +9,7 @@ export const CarouselSection = React.forwardRef<
     <section
       ref={ref}
       id={props.id}
-      className="flex h-screen w-full snap-center items-center justify-center bg-slate-800"
+      className="flex h-screen w-full snap-center items-center justify-center"
     >
       {props.children}
     </section>

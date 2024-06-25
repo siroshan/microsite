@@ -30,7 +30,7 @@ export const HomeCarousel = () => {
           posts.map((post, index) => (
             <CarouselItem
               key={index}
-              className="min-w-60 pl-1 md:basis-1/2 lg:basis-1/3"
+              className="min-w-32 max-w-60 pl-1 sm:basis-full md:basis-1/2 lg:basis-1/3"
             >
               <div className="p-1">
                 <SlideCard description={post.body} title={post.title} />

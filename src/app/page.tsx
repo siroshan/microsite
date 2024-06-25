@@ -2,16 +2,14 @@
 
 import { useEffect, useRef, useState } from "react";
 import {
-  CarouselSection,
+  FadeInWhenVisible,
   HomeCarousel,
-  Logo,
   NavBar,
   NavDots,
   ScrollIndicator,
   VideoSection,
 } from "@ui-core/components";
-import Image from "next/image";
-import Link from "next/link";
+import { motion } from "framer-motion";
 
 export default function Home() {
   const sectionsRef = useRef<HTMLElement[]>([]);
@@ -22,17 +20,11 @@ export default function Home() {
     const options = {
       threshold: 0.3,
     };
-
     const observer = new IntersectionObserver((entries) => {
       entries.forEach((entry) => {
         const targetElement = entry.target as HTMLElement;
         if (entry.isIntersecting) {
           setCurrentSection(sectionsRef.current.indexOf(targetElement));
-          entry.target.classList.add("animate-in", "fade-in");
-          entry.target.classList.remove("animate-out", "fade-out");
-        } else {
-          entry.target.classList.add("animate-out", "fade-out");
-          entry.target.classList.remove("animate-in", "fade-in");
         }
       });
     }, options);
@@ -58,30 +50,70 @@ export default function Home() {
         className="no-scrollbar h-screen w-full overflow-y-scroll"
         style={{ scrollSnapType: "y mandatory", scrollBehavior: "smooth" }}
       >
-        <VideoSection id="section1" ref={setSectionRef(0)}>
-          <div className="relative z-10 flex h-full items-center justify-center">
-            <div className="text-center">
-              <div className="underline-sm-centered relative mb-10 text-5xl font-semibold uppercase text-gray-700 delay-1000 duration-1000 fade-in">
-                Lorem Ipsum Dolor
-              </div>
-              <div className="max-w-2xl text-xl text-gray-700">
-                Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Donec
-                odio. Quisque volutpat mattis eros
+        <FadeInWhenVisible
+          id="section1"
+          className="relative h-screen w-full snap-start"
+          ref={setSectionRef(0)}
+        >
+          <VideoSection>
+            <div className="relative flex h-full items-center justify-center">
+              <div className="text-center">
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false }}
+                  transition={{ duration: 1 }}
+                  variants={{
+                    visible: { top: 0 },
+                    hidden: { top: -40 },
+                  }}
+                  className="underline-sm-centered relative mb-10 text-5xl font-semibold uppercase text-gray-700 "
+                >
+                  Lorem Ipsum Dolor
+                </motion.div>
+                <motion.div
+                  initial="hidden"
+                  whileInView="visible"
+                  viewport={{ once: false }}
+                  transition={{ duration: 1 }}
+                  variants={{
+                    visible: { top: 0 },
+                    hidden: { top: 40 },
+                  }}
+                  className="relative max-w-2xl text-xl text-gray-700"
+                >
+                  Lorem ipsum dolor sit amet, consectetuer adipiscing elit.
+                  Donec odio. Quisque volutpat mattis eros
+                </motion.div>
               </div>
             </div>
-          </div>
-        </VideoSection>
+          </VideoSection>
+        </FadeInWhenVisible>
 
-        <CarouselSection id="section2" ref={setSectionRef(1)}>
+        <FadeInWhenVisible
+          id="section2"
+          className="h-screen w-full snap-start"
+          ref={setSectionRef(1)}
+        >
           <div className="flex h-full w-full items-center justify-end px-40">
-            <div className="max-w-lg ">
-              <div className="mb-10 w-full text-right text-4xl font-bold text-white">
+            <div className="max-w-lg">
+              <motion.div
+                initial="hidden"
+                whileInView="visible"
+                viewport={{ once: false, amount: 0.5 }}
+                transition={{ duration: 1 }}
+                variants={{
+                  visible: { right: 0 },
+                  hidden: { right: 40 },
+                }}
+                className="relative mb-10 w-full text-right text-4xl font-bold text-white"
+              >
                 DONEC NEC JUSTO
-              </div>
+              </motion.div>
               <HomeCarousel />
             </div>
           </div>
-        </CarouselSection>
+        </FadeInWhenVisible>
       </div>
 
       <NavBar currentSection={currentSection} />

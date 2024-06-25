@@ -1,6 +1,6 @@
 import { ReactNode } from "react";
 
 export type VideoSectionProps = {
-  id: string;
+  id?: string;
   children?: ReactNode;
 };

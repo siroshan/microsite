@@ -9,12 +9,7 @@ export const NavDots = ({ currentSection, sections }: NavDotsProps) => {
     <div className="absolute right-0 top-1/2 -translate-y-1/2 transform">
       <div className="flex flex-col items-end justify-end">
         {sections.map((section, index) => (
-          <Link
-            key={section.id}
-            href={`/#${section.id}`}
-            scroll={false}
-            onClick={() => console.log(`clicked ${index + 1}`)}
-          >
+          <Link key={section.id} href={`/#${section.id}`}>
             <Minus
               className={cn(
                 "transform transition-transform duration-500 ease-in-out",

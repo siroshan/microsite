@@ -5,7 +5,7 @@ export const VideoSection = React.forwardRef<HTMLElement, VideoSectionProps>(
   (props, ref) => {
     return (
       <section
-        id="section1"
+        id={props.id}
         ref={ref}
         className="relative h-screen w-full snap-center"
       >

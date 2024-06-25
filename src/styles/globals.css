@@ -13,6 +13,42 @@ body {
 .no-scrollbar::-webkit-scrollbar {
   display: none; /* Safari and Chrome */
 }
+
+#section2 {
+  background-size: cover;
+  background-position: center;
+  height: 100vh;
+  width: 100%;
+}
+
+/* default styles for large and medium screens (landscape) */
+@media (min-width: 1024px) {
+  #section2 {
+    background-image: url("/bg/img-1920x1200.jpg");
+  }
+}
+
+/* medium screens in landscape mode */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: landscape) {
+  #section2 {
+    background-image: url("/bg/img-1280x800.jpg");
+  }
+}
+
+/* medium screens in portrait mode */
+@media (min-width: 768px) and (max-width: 1023px) and (orientation: portrait) {
+  #section2 {
+    background-image: url("/bg/img-800x368.jpg");
+  }
+}
+
+/* small screens */
+@media (max-width: 767px) {
+  #section2 {
+    background-image: url("/bg/img-800x368.jpg");
+  }
+}
+
 * {
   box-sizing: border-box;
 }

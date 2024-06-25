@@ -9,7 +9,7 @@ export const ScrollIndicator = ({ visible, onClick }: ScrollIndicatorProps) => {
       onClick={onClick}
       role="button"
     >
-      <ChevronDown width={50} height={50} />
+      <ChevronDown width={50} height={50} fill="#6da9db" />
     </div>
   ) : null;
 };

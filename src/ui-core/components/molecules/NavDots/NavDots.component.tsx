@@ -2,6 +2,7 @@ import React from "react";
 import { Minus } from "@ui-core/components";
 import Link from "next/link";
 import { NavDotsProps } from "./NavDots.type";
+import { cn } from "@libs/utils";
 
 export const NavDots = ({ currentSection, sections }: NavDotsProps) => {
   return (
@@ -15,11 +16,13 @@ export const NavDots = ({ currentSection, sections }: NavDotsProps) => {
             onClick={() => console.log(`clicked ${index + 1}`)}
           >
             <Minus
-              className={`transform transition-transform duration-500 ease-in-out ${
+              className={cn(
+                "transform transition-transform duration-500 ease-in-out",
+                index === 0 ? "text-white" : "",
                 currentSection === index
                   ? "scale-x-[3] scale-y-[2] text-blue-500"
-                  : "scale-100"
-              }`}
+                  : "scale-100",
+              )}
             />
           </Link>
         ))}

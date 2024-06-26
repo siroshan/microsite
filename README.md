@@ -1,4 +1,7 @@
-This is a [Next.js](https://nextjs.org/) project bootstrapped with [`create-next-app`](https://github.com/vercel/next.js/tree/canary/packages/create-next-app).
+# Microsite
+
+- Data Caching: Implemented data caching using React Query for efficient data fetching and state management
+- Mock API: Utilized JSONPlaceholder as a mock API to simulate data retrieval.
 
 ## Getting Started
 
